@@ -1,5 +1,5 @@
-<template>
-  <q-page padding></q-page>
+<template lang="pug">
+q-page.padding
 </template>
 
 <script>

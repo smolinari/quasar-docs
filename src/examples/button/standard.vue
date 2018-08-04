@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-pa-sm">
     <q-btn color="white" text-color="black" label="Standard" />
     <q-btn color="primary" label="Primary" />
     <q-btn color="secondary" label="Secondary" />
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  name: 'gigi'
+  name: 'gigi',
+  methods: {
+    some () {
+      return 'wow'
+    }
+  }
 }
 </script>
 

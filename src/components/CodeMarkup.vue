@@ -1,22 +1,17 @@
-<template>
-  <div class="code-markup relative-position">
-    <code-prism :language="language">
-      <slot />
-    </code-prism>
-
-    <div class="absolute" style="top: 8px; right: 8px;">
-      <q-btn
-        color="white"
-        round
-        dense
-        flat
-        icon="content_copy"
-        @click="copyToClipboard"
-      >
-        <q-tooltip :offset="[0, 10]">Copy to Clipboard</q-tooltip>
-      </q-btn>
-    </div>
-  </div>
+<template lang="pug">
+.code-markup.relative-position
+  code-prism(:language="language")
+    slot
+  .absolute(style="top: 8px; right: 8px;")
+    q-btn(
+      color="white"
+      round
+      dense
+      flat
+      icon="content_copy"
+      @click="copyToClipboard"
+    )
+      q-tooltip(:offset="[0, 10]") Copy to Clipboard
 </template>
 
 <script>

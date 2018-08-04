@@ -1,66 +1,44 @@
-<template>
-  <div class="component-api shadow-2 q-my-xl">
-    <q-toolbar color="grey-2" text-color="grey-7" class="q-pa-none">
-      <q-tabs
-        v-model="currentTab"
-        color="grey-2"
-        text-color="grey-7"
-        class="self-stretch"
-      >
-        <q-tab
-          v-for="tab in tabs"
-          :key="`api-tab-${tab}`"
-          slot="title"
-          :name="tab"
-          :label="tab"
-        />
-      </q-tabs>
-      <div class="col" />
-      <div class="q-pr-sm">
-        <q-search class="bg-transparent" hide-underline v-model="filter" />
-      </div>
-      <hr class="q-hr absolute-bottom" />
-    </q-toolbar>
+<template lang="pug">
+.component-api.shadow-2.q-my-xl
+  q-toolbar.q-pa-none(color="grey-2", text-color="grey-7")
+    q-tabs.self-stretch(v-model="currentTab", color="grey-2", text-color="grey-7")
+      q-tab(
+        v-for="tab in tabs"
+        :key="`api-tab-${tab}`"
+        slot="title"
+        :name="tab"
+        :label="tab"
+      )
+    .col
+    .q-pr-sm
+      q-search.bg-transparent(hide-underline, v-model="filter")
+    hr.q-hr.absolute-bottom
 
-    <q-table
-      grid
-      :data="api[currentTab]"
-      :columns="columns[currentTab]"
-      :filter="filter"
-      hide-header
-      hide-bottom
-      row-key="name"
-      class="component-api q-pa-sm"
-    >
-      <div
-        slot="item"
-        slot-scope="props"
-        class="col-12 q-my-xs"
-      >
-        <div class="row bg-grey-2 component-api-item">
-          <div class="col-3">
-            <div class="component-api-col">Name</div>
-            <div class="text-bold">{{ props.row.name }}</div>
-          </div>
-          <div v-if="props.row.default" class="col-3">
-            <div class="component-api-col">Default</div>
-            <div>{{ props.row.default }}</div>
-          </div>
-          <div v-if="props.row.type" class="col-3">
-            <div class="component-api-col">Type</div>
-            <div class="text-bold">{{ props.row.type }}</div>
-          </div>
-          <div v-if="props.row.example" class="col-3">
-            <div class="component-api-col">Example</div>
-            <div class="text-bold">{{ props.row.example }}</div>
-          </div>
-          <div class="component-api-desc col-12 bg-grey-3 text-weight-light">
-            <div>{{ props.row.desc }}</div>
-          </div>
-        </div>
-      </div>
-    </q-table>
-  </div>
+  q-table.component-api.q-pa-sm(
+    grid
+    :data="api[currentTab]"
+    :columns="columns[currentTab]"
+    :filter="filter"
+    hide-header
+    hide-bottom
+    row-key="name"
+  )
+    .col-12.q-my-xs(slot="item", slot-scope="props")
+      .row.bg-grey-2.component-api-item
+        .col-3
+          .component-api-col Name
+          .text-bold {{ props.row.name }}
+        .col-3(v-if="props.row.default")
+          .component-api-col Default
+          div {{ props.row.default }}
+        .col-3(v-if="props.row.type")
+          .component-api-col Type
+          .text-bold {{ props.row.type }}
+        .col-3(v-if="props.row.example")
+          .component-api-col Example
+          .text-bold {{ props.row.example }}
+        .component-api-desc.col-12.bg-grey-3.text-weight-light
+          div {{ props.row.desc }}
 </template>
 
 <script>

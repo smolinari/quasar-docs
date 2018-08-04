@@ -1,62 +1,48 @@
-<template>
-  <q-card class="code-example q-my-xl">
-    <q-toolbar text-color="grey-7" color="grey-2">
-      <div class="q-subtitle">{{ title }}</div>
-      <div class="col" />
-      <q-btn dense flat round icon="fab fa-github" color="grey-7">
-        <q-tooltip :offset="[0, 10]">View on Github</q-tooltip>
-      </q-btn>
-      <q-btn dense flat round icon="fab fa-codepen" class="q-ml-sm" color="grey-7">
-        <q-tooltip :offset="[0, 10]">Edit in Codepen</q-tooltip>
-      </q-btn>
-      <q-btn dense flat round icon="code" class="q-ml-sm" @click="expanded = !expanded" color="grey-7">
-        <q-tooltip :offset="[0, 10]">View Source</q-tooltip>
-      </q-btn>
-    </q-toolbar>
+<template lang="pug">
+q-card.code-example.q-my-xl
+  q-toolbar(text-color="grey-7", color="grey-2")
+    .q-subtitle {{ title }}
+    .col
+    q-btn(dense, flat, round, icon="fab fa-github", color="grey-7")
+      q-tooltip(:offset="[0, 10]") View on Github
+    q-btn.q-ml-sm(dense, flat, round, icon="fab fa-codepen", color="grey-7", @click="$refs.codepen.open()")
+      q-tooltip(:offset="[0, 10]") Edit in Codepen
+    q-btn.q-ml-sm(dense, flat, round, icon="code", @click="expanded = !expanded", color="grey-7")
+      q-tooltip(:offset="[0, 10]") View Source
 
-    <q-card-separator />
+  q-card-separator
 
-    <q-slide-transition>
-      <div v-show="expanded">
-        <q-tabs
-          v-model="currentTab"
-          inverted
-          color="grey-7"
-          no-pane-border
-        >
-          <q-tab
-            v-for="tab in tabs"
-            :key="`tab-${tab}`"
-            slot="title"
-            :name="tab"
-            :label="tab"
-          />
+  q-slide-transition
+    div(v-show="expanded")
+      q-tabs(v-model="currentTab", inverted, color="grey-7", no-pane-border)
+        q-tab(
+          v-for="tab in tabs"
+          :key="`tab-${tab}`"
+          slot="title"
+          :name="tab"
+          :label="tab"
+        )
+        q-tab-pane.q-pa-none(
+          v-for="tab in tabs"
+          :key="`pane-${tab}`"
+          :name="tab"
+        )
+          code-markup(language="markup") {{ parts[tab] }}
 
-          <q-tab-pane
-            v-for="tab in tabs"
-            :key="`pane-${tab}`"
-            :name="tab"
-            class="q-pa-none"
-          >
-            <code-markup language="markup">{{ parts[tab] }}</code-markup>
-          </q-tab-pane>
-        </q-tabs>
-      </div>
-    </q-slide-transition>
+  component(:is="component")
 
-    <div class="q-pa-sm">
-      <component :is="component" />
-    </div>
-  </q-card>
+  codepen(ref="codepen", :title="title", :parts="parts")
 </template>
 
 <script>
 import CodeMarkup from './CodeMarkup.vue'
+import Codepen from './Codepen.vue'
 
 export default {
   name: 'CodeExample',
   components: {
-    CodeMarkup
+    CodeMarkup,
+    Codepen
   },
   props: {
     title: String,

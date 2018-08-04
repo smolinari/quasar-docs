@@ -20,6 +20,10 @@ module.exports = function (ctx) {
       extendWebpack (cfg) {
         cfg.resolve.alias.examples = path.resolve(__dirname, 'src/examples')
         cfg.module.rules.push({
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        })
+        cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
@@ -35,7 +39,7 @@ module.exports = function (ctx) {
     framework: {
       all: true
     },
-    animations: [],
+    animations: ['fadeIn', 'fadeOut'],
     ssr: {
       pwa: false
     },
