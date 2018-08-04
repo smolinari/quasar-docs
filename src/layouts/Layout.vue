@@ -28,11 +28,18 @@
 
         <div class="col" />
 
-        <div class="text-weight-light q-mx-sm">
-          v{{ $q.version }}
-        </div>
-
-        <div class="col" />
+        <q-btn-dropdown flat no-caps :label="`v${$q.version}`" class="header-squared self-stretch text-bold">
+          <q-list link>
+            <q-item
+              v-for="version in ['16', '15', '14', '13']"
+              :key="version"
+              v-close-overlay
+              @click.native="openURL(`https://v0-${version}.quasar-framework.org/`)"
+            >
+              <q-item-main :label="`v0.${version}`" />
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
 
         <q-btn-dropdown flat no-caps label="Quick Links" class="header-squared self-stretch text-bold">
           <q-list link>
