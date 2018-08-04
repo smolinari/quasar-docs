@@ -1,7 +1,7 @@
 <template lang="pug">
-q-layout(view="hHh Lpr lFf")
+q-layout(view="hHh Lpr lff")
   q-layout-header
-    q-toolbar.q-py-none(color="primary", glossy)
+    q-toolbar.q-py-none(color="primary")
       q-btn(v-if="hasDrawer", flat, dense, round, @click="drawerOpened = !drawerOpened", aria-label="Menu")
         q-icon(name="menu")
       q-btn.self-stretch.text-bold.q-ml-xs(flat, no-caps, to="/")
@@ -64,9 +64,9 @@ q-layout(view="hHh Lpr lFf")
             q-item-side(color="red", icon="fab fa-stack-overflow")
             q-item-main(label="Stack Overflow")
           q-item-separator
-            q-item(v-close-overlay, @click.native="openURL('https://www.patreon.com/quasarframework')")
-              q-item-side(color="red", icon="fab fa-patreon")
-              q-item-main(label="Patreon")
+          q-item(v-close-overlay, @click.native="openURL('https://www.patreon.com/quasarframework')")
+            q-item-side(color="red", icon="fab fa-patreon")
+            q-item-main(label="Patreon")
 
   q-layout-drawer(v-if="hasDrawer", v-model="drawerOpened")
     q-list(no-border, link, inset-delimiter)
@@ -117,6 +117,6 @@ export default {
 .header-squared
   border-radius 0
 .header-logo
-  width 30px
-  height 30px
+  width 25px
+  height 25px
 </style>

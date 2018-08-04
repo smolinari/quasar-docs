@@ -10,6 +10,7 @@ module.exports = function (ctx) {
       'app.styl'
     ],
     extras: [
+      'roboto-font',
       'material-icons',
       'fontawesome'
     ],
