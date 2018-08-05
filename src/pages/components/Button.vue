@@ -20,7 +20,7 @@ q-page(padding)
     components="QBtn"
     :plugins="['Meta', 'Cookies']"
     directives="Ripple"
-    :config="config"
+    :config="{ notify: 'Notify' }"
   )
 
   code-example(title="Standard", file="Button/Standard")
@@ -67,11 +67,6 @@ export default {
         {name: 'show', desc: 'Open Context Menu'}
       ]
     }
-  }),
-  beforeCreate () {
-    this.config = {
-      btn: 'QBtn'
-    }
-  }
+  })
 }
 </script>
