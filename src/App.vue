@@ -8,7 +8,6 @@
     @leave="resetScroll"
   )
     router-view
-  </div>
 </template>
 
 <script>
