@@ -12,17 +12,24 @@
       @click="copyToClipboard"
     )
       q-tooltip(:offset="[0, 10]") Copy to Clipboard
+
+  transition(
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut"
+  )
+    .absolute(
+      v-show="copied"
+      class="text-white"
+      style="top: 18px; right: 58px;"
+    ) Copied to clipboard
 </template>
 
 <script>
 import 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/themes/prism-okaidia.css'
 import 'prismjs/components/prism-bash.js'
-import 'prismjs/components/prism-css.js'
 import 'prismjs/components/prism-javascript.js'
-import 'prismjs/components/prism-json.js'
 import 'prismjs/components/prism-stylus.js'
-import 'prismjs/components/prism-typescript.js'
 
 import CodePrism from './CodePrism.js'
 
@@ -37,6 +44,8 @@ export default {
     language: String
   },
 
+  data: () => ({ copied: false }),
+
   methods: {
     copyToClipboard () {
       const markup = this.$el.querySelector('pre')
@@ -46,6 +55,27 @@ export default {
       document.execCommand('selectAll', false, null)
       document.execCommand('copy')
       markup.removeAttribute('contenteditable')
+
+      if (window.getSelection) {
+        const sel = window.getSelection()
+
+        if (sel.removeAllRanges) {
+          sel.removeAllRanges()
+        }
+        else if (sel.empty) {
+          sel.empty()
+        }
+      }
+      else if (document.selection) {
+        document.selection.empty && document.selection.empty()
+      }
+
+      this.copied = true
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.copied = false
+        this.timer = null
+      }, 2000)
     }
   }
 }
@@ -55,5 +85,6 @@ export default {
 .code-markup
   font-size 12px
   pre
+    border-radius 0
     margin 0
 </style>

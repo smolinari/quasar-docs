@@ -9,6 +9,20 @@ q-page(padding)
     br
     | When not disabled or spinning, QBtn emits a @click event, as soon as it is clicked or tapped.
 
+  component-installation(
+    :components="['QBtn', 'QToggleBtn']"
+  )
+  component-installation(
+    components="QBtn"
+  )
+
+  component-installation(
+    components="QBtn"
+    :plugins="['Meta', 'Cookies']"
+    directives="Ripple"
+    :config="config"
+  )
+
   code-example(title="Standard", file="Button/Standard")
 
   div
@@ -24,6 +38,7 @@ q-page(padding)
 <script>
 import CodeExample from 'components/CodeExample.vue'
 import ComponentApi from 'components/ComponentApi.vue'
+import ComponentInstallation from 'components/ComponentInstallation.vue'
 
 export default {
   name: 'Button',
@@ -32,7 +47,8 @@ export default {
   },
   components: {
     CodeExample,
-    ComponentApi
+    ComponentApi,
+    ComponentInstallation
   },
   data: () => ({
     page: 'Button',
@@ -51,6 +67,11 @@ export default {
         {name: 'show', desc: 'Open Context Menu'}
       ]
     }
-  })
+  }),
+  beforeCreate () {
+    this.config = {
+      btn: 'QBtn'
+    }
+  }
 }
 </script>
