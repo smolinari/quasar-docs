@@ -73,6 +73,8 @@ q-layout(view="hHh Lpr lff")
       q-list-header Essential Links
       q-item(to="/", exact)
         q-item-main(label="Landing")
+      q-item(to="/components", exact)
+        q-item-main(label="Index")
       q-item(to="/components/button", exact)
         q-item-main(label="Button")
 

@@ -4,16 +4,17 @@ export default {
     code: {
       type: String
     },
-    language: {
+    lang: {
       type: String,
-      default: 'markup'
+      default: 'javascript'
     }
   },
   render (h, ctx) {
-    const code = ctx.props.code || ctx.children[0].text
-    const language = ctx.props.language
-    const prismLanguage = Prism.languages[language]
-    const className = `language-${language}`
+    const
+      code = ctx.props.code || ctx.children[0].text,
+      language = ctx.props.lang,
+      prismLanguage = Prism.languages[language],
+      className = `language-${language}`
 
     return h(
       'pre',

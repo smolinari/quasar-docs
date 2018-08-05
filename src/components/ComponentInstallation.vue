@@ -13,13 +13,13 @@
     )
 
     q-tab-pane.q-pa-none(name="Quasar CLI")
-      code-markup(language="javascript") {{ QuasarCli }}
+      code-markup(copy) {{ QuasarCli }}
 
     q-tab-pane.q-pa-none(name="UMD")
-      code-markup(language="javascript") {{ UMD }}
+      code-markup(copy) {{ UMD }}
 
     q-tab-pane.q-pa-none(name="Vue CLI")
-      code-markup(language="javascript") {{ VueCli }}
+      code-markup(copy) {{ VueCli }}
 </template>
 
 <script>
@@ -136,4 +136,6 @@ Vue.use(Quasar, {
     padding 0
   .q-tabs-panes
     border 0 !important
+  .code-markup pre
+    border-radius 0
 </style>

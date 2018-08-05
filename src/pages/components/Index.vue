@@ -1,12 +1,21 @@
 <template lang="pug">
-q-page.padding
+q-page(padding)
+  code-markup(lang="bash")
+    | $ quasar dev -m ssr
+    | # some comment
+    | $ quasar build
 </template>
 
 <script>
+import CodeMarkup from 'components/CodeMarkup.vue'
+
 export default {
   name: 'Components',
   meta: {
     title: 'Components'
+  },
+  components: {
+    CodeMarkup
   }
 }
 </script>

@@ -27,7 +27,7 @@ q-card.code-example.q-my-xl
           :key="`pane-${tab}`"
           :name="tab"
         )
-          code-markup(language="markup") {{ parts[tab] }}
+          code-markup(lang="markup", copy) {{ parts[tab] }}
 
   component(:is="component")
 
@@ -106,4 +106,6 @@ export default {
     padding 0
   .q-tabs-panes
     border 0 !important
+  .code-markup pre
+    border-radius 0
 </style>

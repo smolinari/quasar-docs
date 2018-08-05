@@ -1,8 +1,12 @@
 <template lang="pug">
 .code-markup.relative-position
-  code-prism(:language="language")
+  code-prism(:lang="lang")
     slot
-  .absolute(style="top: 8px; right: 8px;")
+
+  .absolute(
+    v-if="copy"
+    style="top: 8px; right: 8px;"
+  )
     q-btn(
       color="white"
       round
@@ -13,7 +17,14 @@
     )
       q-tooltip(:offset="[0, 10]") Copy to Clipboard
 
+  .absolute(
+    v-else
+    class="text-grey"
+    style="top: 8px; right: 8px;"
+  ) {{ lang }}
+
   transition(
+    v-if="copy"
     enter-active-class="animated fadeIn"
     leave-active-class="animated fadeOut"
   )
@@ -41,7 +52,8 @@ export default {
   },
 
   props: {
-    language: String
+    lang: String,
+    copy: Boolean
   },
 
   data: () => ({ copied: false }),
@@ -83,8 +95,7 @@ export default {
 
 <style lang="stylus">
 .code-markup
-  font-size 12px
+  font-size 14px
   pre
-    border-radius 0
     margin 0
 </style>
