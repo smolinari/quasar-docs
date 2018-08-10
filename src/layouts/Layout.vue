@@ -1,15 +1,13 @@
 <template lang="pug">
-q-layout(view="hHh Lpr lff")
+q-layout(view="hHh LpR lff")
   q-layout-header
     q-toolbar.q-py-none(color="primary")
-      q-btn(v-if="hasDrawer", flat, dense, round, @click="drawerOpened = !drawerOpened", aria-label="Menu")
+      q-btn(v-show="hasDrawer", flat, dense, round, @click="leftDrawerState = !leftDrawerState", aria-label="Menu")
         q-icon(name="menu")
       q-btn.self-stretch.text-bold.q-ml-xs(flat, no-caps, to="/")
         img.header-logo.q-mr-sm(src="statics/quasar-logo.png")
         span Quasar
-
-      q-btn.header-squared.self-stretch.text-bold(no-caps, flat, label="Guide", to="/guide")
-      q-btn.header-squared.self-stretch.text-bold(no-caps, flat, label="Components", to="/components")
+      q-btn.self-stretch.text-bold.q-ml-xs(flat, no-caps, to="/components/button", label="Documentation")
 
       .col
 
@@ -68,15 +66,65 @@ q-layout(view="hHh Lpr lff")
             q-item-side(color="red", icon="fab fa-patreon")
             q-item-main(label="Patreon")
 
-  q-layout-drawer(v-if="hasDrawer", v-model="drawerOpened")
-    q-list(no-border, link, inset-delimiter)
-      q-list-header Essential Links
-      q-item(to="/", exact)
-        q-item-main(label="Landing")
-      q-item(to="/components", exact)
-        q-item-main(label="Index")
-      q-item(to="/components/button", exact)
-        q-item-main(label="Button")
+      q-btn.q-ml-xs(v-show="hasDrawer", flat, dense, round, @click="rightDrawerState = !rightDrawerState", aria-label="Menu")
+        q-icon(name="menu")
+
+  q-layout-drawer(
+    v-if="hasDrawer"
+    v-model="leftDrawerState"
+    content-class="shadow-0"
+  )
+    .flex.justify-center
+      .bg-grey-4.flex.flex-center.text-white.q-mt-md(
+        style="width: 250px; height: 200px"
+      ) Sponsors
+
+      q-btn.q-mt-lg(
+        type="a"
+        href="https://www.patreon.com/quasarframework"
+        target="_blank"
+        size="13px"
+        color="red"
+        icon="fab fa-patreon"
+        label="Become a Patron"
+      )
+
+      q-search.q-my-lg(v-model="search", inverted-light, color="white")
+
+    q-item-separator
+    q-list-header For Design - Working
+    q-item(to="/", exact)
+      q-item-main(label="Landing Page")
+    q-item(to="/components/button", exact)
+      q-item-main(label="Component Page")
+    q-item(to="/components/other", exact)
+      q-item-main(label="Some Other Page")
+
+    q-item-separator
+    q-list-header.q-mt-md Actual Menu - Not Working
+    app-menu
+
+  q-layout-drawer(
+    v-if="hasDrawer"
+    v-model="rightDrawerState",
+    side="right"
+    :width="180"
+    content-class="shadow-0"
+  )
+    q-list(no-border, link)
+      q-list-header Table of Contents
+      q-item(@click.native="scrollTo('introduction')")
+        q-item-main(label="Introduction")
+      q-item(@click.native="scrollTo('installation')")
+        q-item-main(label="Installation")
+      q-item(@click.native="scrollTo('usage')")
+        q-item-main(label="Usage")
+      q-item(@click.native="scrollTo('api')")
+        q-item-main(label="API")
+    .flex.justify-center.q-mt-sm
+      .bg-grey.flex.flex-center.text-white(
+        style="width: 160px; height: 243px"
+      ) Ad
 
   q-page-container
     transition(
@@ -90,18 +138,44 @@ q-layout(view="hHh Lpr lff")
 </template>
 
 <script>
-import { openURL } from 'quasar'
+import { openURL, scroll } from 'quasar'
+import AppMenu from 'components/AppMenu.js'
 
 export default {
   name: 'Layout',
+  components: {
+    AppMenu
+  },
+  watch: {
+    $route () {
+      this.leftDrawerState = true
+      this.rightDrawerState = true
+    }
+  },
   data () {
     return {
-      drawerOpened: this.$q.platform.is.desktop
+      search: ''
     }
   },
   computed: {
     hasDrawer () {
-      return this.$route.path !== '/'
+      return this.$store.getters.hasDrawer
+    },
+    leftDrawerState: {
+      get () {
+        return this.$store.state.leftDrawerState
+      },
+      set (val) {
+        this.$store.commit('updateLeftDrawerState', val)
+      }
+    },
+    rightDrawerState: {
+      get () {
+        return this.$store.state.rightDrawerState
+      },
+      set (val) {
+        this.$store.commit('updateRightDrawerState', val)
+      }
     }
   },
   methods: {
@@ -110,6 +184,16 @@ export default {
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
       done()
+    },
+    scrollTo (id) {
+      const el = document.getElementById(id)
+      if (el) {
+        const
+          target = scroll.getScrollTarget(el),
+          offset = el.offsetTop - el.scrollHeight
+
+        scroll.setScrollPosition(target, offset, 500)
+      }
     }
   }
 }

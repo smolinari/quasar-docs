@@ -9,16 +9,12 @@ const routes = [
         component: () => import('pages/Landing.vue')
       },
       {
-        path: 'guide',
-        component: () => import('pages/guide/Index.vue')
-      },
-      {
-        path: 'components',
-        component: () => import('pages/components/Index.vue')
-      },
-      {
         path: 'components/button',
         component: () => import('pages/components/Button.vue')
+      },
+      {
+        path: 'components/other',
+        component: () => import('pages/components/Other.vue')
       }
     ]
   }
