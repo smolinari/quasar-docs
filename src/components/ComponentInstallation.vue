@@ -132,8 +132,6 @@ Vue.use(Quasar, {
 
 <style lang="stylus">
 .component-installation
-  .q-tabs-head
-    padding 0
   .q-tabs-panes
     border 0 !important
   .code-markup pre

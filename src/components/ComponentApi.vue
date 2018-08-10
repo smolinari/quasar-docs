@@ -69,8 +69,6 @@ export default {
 @import '~variables'
 
 .component-api
-  .q-tabs-head
-    padding 0
   .q-hr
     margin 0
     bottom 1px

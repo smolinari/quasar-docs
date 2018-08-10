@@ -2,12 +2,11 @@
 q-page(padding)
   .q-headline Button
 
-  div
-    | Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
-    br
-    | The button component also comes with a spinner or loading effect. You would use this for times when app execution may cause a delay and you want to give the user some feedback about that delay. When used, the button will display a spinning animation as soon as the user clicks the button.
-    br
-    | When not disabled or spinning, QBtn emits a @click event, as soon as it is clicked or tapped.
+  p Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
+
+  p The button component also comes with a spinner or loading effect. You would use this for times when app execution may cause a delay and you want to give the user some feedback about that delay. When used, the button will display a spinning animation as soon as the user clicks the button.
+
+  p When not disabled or spinning, QBtn emits a @click event, as soon as it is clicked or tapped.
 
   component-installation(
     :components="['QBtn', 'QToggleBtn']"
@@ -25,12 +24,11 @@ q-page(padding)
 
   code-example(title="Standard", file="Button/Standard")
 
-  div
-    | Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
-    br
-    | The button component also comes with a spinner or loading effect. You would use this for times when app execution may cause a delay and you want to give the user some feedback about that delay. When used, the button will display a spinning animation as soon as the user clicks the button.
-    br
-    | When not disabled or spinning, QBtn emits a @click event, as soon as it is clicked or tapped.
+  p Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
+
+  p The button component also comes with a spinner or loading effect. You would use this for times when app execution may cause a delay and you want to give the user some feedback about that delay. When used, the button will display a spinning animation as soon as the user clicks the button.
+
+  p When not disabled or spinning, QBtn emits a @click event, as soon as it is clicked or tapped.
 
   component-api(:api="api")
 </template>

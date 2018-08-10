@@ -1,3 +1,9 @@
+import 'prismjs'
+import 'prismjs/themes/prism-okaidia.css'
+import 'prismjs/components/prism-bash.js'
+import 'prismjs/components/prism-javascript.js'
+import 'prismjs/components/prism-stylus.js'
+
 export default {
   functional: true,
   props: {
