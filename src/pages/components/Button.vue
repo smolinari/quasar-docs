@@ -4,14 +4,22 @@ q-page(padding)
 
   section.q-title#introduction Introduction
   p Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
+  p Quasar has a component called QBtn which is a button with a few extra useful features. For instance, it comes in two shapes: rectangle (default) and round. It also has the material ripple effect by default when building with Material theme.
 
-  p.text-red Some code markup
+  p.q-my-lg.text-white.bg-red Design requirement: 6 level typography for page titles/sections
+
+  p.q-my-lg.text-white.bg-red Design requirement: Footer with general links
+
+  p Some code markup
   code-markup(lang="bash")
     | $ quasar dev -m ssr
     | # some comment
     | $ quasar build
 
-  p.q-mt-lg.text-red Some table
+  p.q-mt-lg.text-white.bg-red Design requirement: Token
+  div text, more text, a <q-chip small square>token</q-chip>, some more text.
+
+  p.q-mt-lg.text-white.bg-red Design requirement: Simple table
   table.q-mb-lg
     thead
       tr
